@@ -27,8 +27,7 @@ namespace Echo
         {
             BinaryReader reader = new BinaryReader(clientSocket.GetStream());
 
-            while (true)
-            {
+            while (true){
                 string str = "response: ";
                 str = str + reader.ReadString();
                 Console.WriteLine(str);

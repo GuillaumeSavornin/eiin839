@@ -54,10 +54,26 @@ namespace Echo
 
             while (true)
             {
-
                 string str = reader.ReadString();
                 Console.WriteLine(str);
-                writer.Write(str);
+
+                if (str.Split(" ")[0] == "GET")
+                {
+                    try { 
+                        string fileRelativePath = str.Split(" ")[1].Substring(1);
+                        string responseString = File.ReadAllText(fileRelativePath);
+                        writer.Write(responseString);
+                    } catch(FileNotFoundException e)
+                    {
+                        Console.WriteLine(e.Message);
+                        writer.Write(e.Message);
+                    }
+
+                }
+                else
+                {
+                    writer.Write("404 Not found");
+                }
             }
         }
 

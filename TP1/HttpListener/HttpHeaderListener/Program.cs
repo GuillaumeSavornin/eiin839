@@ -6,7 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 
-namespace BasicServerHTTPlistener
+namespace HttpHeaderListener
 {
     internal class Program
     {
@@ -26,8 +26,8 @@ namespace BasicServerHTTPlistener
                 Console.WriteLine("A more recent Windows version is required to use the HttpListener class.");
                 return;
             }
- 
- 
+
+
             // Create a listener.
             HttpListener listener = new HttpListener();
 
@@ -75,30 +75,14 @@ namespace BasicServerHTTPlistener
                 HttpListenerResponse response = context.Response;
 
                 // Construct a response.
-                string responseString;
-
-                if(request.HttpMethod == "GET")
-                {
-                    try { 
-                    responseString = File.ReadAllText(request.Url.AbsolutePath.Substring(1));
-                    }catch(FileNotFoundException e)
-                    {
-                        Console.WriteLine(e.Message);
-                        responseString = e.Message;
-                    }
-                }
-                else
-                {
-                    responseString = "<HTML><BODY> Hello world!</BODY></HTML>";
-
-                }
+                string responseString = "<HTML><BODY> Hello world!</BODY></HTML>";
 
                 Console.WriteLine("HEADER DATA = ");
                 for (int i = 0; i < request.Headers.Count; i++)
                 {
                     Console.WriteLine("\t" + request.Headers.AllKeys[i] + " : " + request.Headers[i]);
                 }
-
+                //    Console.WriteLine("\tContent type : " + request.Headers.Get((int)HttpRequestHeader.ContentType));
 
                 byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
                 // Get a response stream and write the response to it.
