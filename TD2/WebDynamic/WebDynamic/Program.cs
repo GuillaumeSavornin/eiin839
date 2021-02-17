@@ -15,6 +15,10 @@ using System.Web;
  *      - Question 6 : http://localhost:8080/a/b/execScript
  *      - Question 7 : http://localhost:8080/a/b/incr?val=7
  *      
+ *      --> Travail suplémentaire : 
+ *          - JEU DU PENDU : http://localhost:8080/a/b/jeuDuPendu?letter=E
+ *          => Explication de comment jouer sur la page web !
+ *      
  */
 
 namespace WebDynamic
@@ -41,11 +45,6 @@ namespace WebDynamic
                 foreach (string s in args)
                 {
                     listener.Prefixes.Add(s);
-                    // don't forget to authorize access to the TCP/IP addresses localhost:xxxx and localhost:yyyy 
-                    // with netsh http add urlacl url=http://localhost:xxxx/ user="Tout le monde"
-                    // and netsh http add urlacl url=http://localhost:yyyy/ user="Tout le monde"
-                    // user="Tout le monde" is language dependent, use user=Everyone in english 
-
                 }
             }
             else
@@ -69,7 +68,6 @@ namespace WebDynamic
             };
 
 
-
             while (true)
             {
                 // Note: The GetContext method blocks while waiting for a request.
@@ -90,6 +88,7 @@ namespace WebDynamic
 
                 //parse params in 
                 string val = HttpUtility.ParseQueryString(request.Url.Query).Get("val");
+                string letter = HttpUtility.ParseQueryString(request.Url.Query).Get("letter");
                 string param1 = HttpUtility.ParseQueryString(request.Url.Query).Get("param1");
                 string param2 = HttpUtility.ParseQueryString(request.Url.Query).Get("param2");
                 string param3 = HttpUtility.ParseQueryString(request.Url.Query).Get("param3");
@@ -113,21 +112,29 @@ namespace WebDynamic
                     if(val != null)
                     {
                         arguments = new object[] { val };
-                        response.ContentType = "text/json"; // MIME 
+                        response.ContentType = "text/json"; // MIME JSON
+                    }else
+                    if (letter != null)
+                    {
+                        arguments = new object[] { letter };
+                        response.ContentType = "text/html"; // MIME JSON
                     }
                     else
                     {
                         arguments = new object[] { param1, param2 };
-                        response.ContentType = "text/html"; // MIME
+                        response.ContentType = "text/html"; // MIME HTML
                     }
+
+                    // REFLICTIVITY
                     Type type = typeof(Mymethods);
                     MethodInfo method = type.GetMethod(methodName);
                     Mymethods mymethods = new Mymethods();
+
                     try { 
                         responseString = (string)method.Invoke(mymethods, arguments);
                     } catch (NullReferenceException e)
                     {
-                        responseString = "Error : \"" + methodName + "TP2\" is not a valid method. Try : helloMethod, execMethod, execScript";
+                        responseString = "Error : \"" + methodName + "\" is not a valid method. Try : helloMethod, execMethod, execScript";
                     }
 
                 }
@@ -147,8 +154,6 @@ namespace WebDynamic
                 // You must close the output stream.
                 output.Close();
             }
-            // Httplistener neither stop ... But Ctrl-C do that ...
-            // listener.Stop();
         }
     }
 }
