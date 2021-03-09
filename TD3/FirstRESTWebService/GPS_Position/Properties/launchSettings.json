@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "GPS_Position": {
-      "commandName": "Project",
-      "commandLineArgs": "Lyon 5,45654 8,46578"
-    }
-  }
-}
