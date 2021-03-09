@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SingleStationInfo": {
+      "commandName": "Project",
+      "commandLineArgs": "6004 Lyon"
+    }
+  }
+}
