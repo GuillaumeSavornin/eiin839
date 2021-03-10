@@ -1,0 +1,11 @@
+#showContract, #showContract, #latCont, #longCont{
+    padding-top: 1em;
+}
+
+#inputContractList, #findSatitonButton {
+    margin-top: 1em;
+}
+
+#info{
+    color:red;
+}

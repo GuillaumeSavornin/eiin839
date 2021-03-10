@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- The title of the page is written in the tab of the browser. -->
+    <title>My first Web Services UI client</title>
+
+    <!-- Let's load the CSS file.
+    Note: we could also write the style directly in the html page, inside a <style> tag. -->
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div id="info">
+        <p>Press the button to see the next exercice</p>
+    </div>
+
+
+    <!-- We will use a <div> to group all items related to the API key, to ease the styling. -->
+    <div id="apiKeyBlock">
+        <!-- The "for" attribute of a label is linked to the id of an input -->
+        <label for="apiKey">API key:</label>
+        <input name="apiKeyInput" id="apiKey" value="53cd9a615200bb7bea6e01ece896597513ccae67">
+    </div>
+
+    <div id="step1" class="step">
+        <h2>Step 1: Retrieve all JCDecaux contracts</h2>
+        <!-- onclick is an attribute that contains javascript code, triggered when the element is clicked. -->
+        <button id="retrieveContractsButton" onclick="retrieveAllContracts();">Retrieve contracts</button>
+    </div>
+
+
+    <div id="showContract"></div>
+
+    <div id="step2" style="display:none">
+        <h2>Step 2: Find the closest stations</h2>
+
+        <div id="latCont">
+            <label for="latitude">Latitude :</label>
+            <input name="latitude" id="latitude" value="45.751368">
+        </div>
+
+        <div id="longCont">
+            <label for="longitude">Longitude :</label>
+            <input name="longitude" id="longitude" value="4.870345">
+        </div>
+
+        <div class="step">
+            <button id="findSatitonButton" onclick="findClosestStation();">Find closest Station</button>
+        </div>
+    </div>
+
+    <!-- Let's load the JS file.
+    Note: we could also write the javascript directly in the html page, inside a <script> tag. -->
+    <script type="text/javascript" src="main.js"></script>
+</body>
+</html>
