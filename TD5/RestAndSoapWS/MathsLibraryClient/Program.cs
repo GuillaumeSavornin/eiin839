@@ -13,7 +13,7 @@ namespace MathsLibraryClient
             MathsOperations.IMathsOperations calculator = new MathsOperations.MathsOperationsClient();
 
 
-            Console.WriteLine("Type d'opération à effectuer : (1) +   (2) -   (3) x   (4) /");
+            Console.WriteLine("Type d'opération à effectuer (entrez l'index) : (1) +   (2) -   (3) x   (4) /");
             int operationType = int.Parse(Console.ReadLine());
 
             Console.WriteLine("Entrez une première valeur :");
